@@ -1,10 +1,33 @@
-const http = require('http')
+const express = require('express')
+const app = express()
 
-const routes = require('./routes')
+app.use('/runs', (req, res, next) => {
+    console.log('This always runs!')
+    next() // Alows the request to continue to the next middleware in line
+} )
 
-const server = http.createServer(routes.handler)
-server.listen(3000)
+app.use('/add-product', (req, res, next) => {
+    console.log('Product page!')
+    res.send('<h1>The Add Product page</h1>')
+   
+} )
 
+app.use((req, res, next) => {
+    console.log('In another middleware!')
+    res.send('<h1>Hello from Express!</h1>')
+} )
+
+app.listen(3000)
+
+
+
+
+// const http = require('http')
+// const server = http.createServer(app)
+// server.listen(3000)
+
+// const routes = require('./routes')
+//const server = http.createServer(routes.handler)
 
 /*
 const fs = require('fs')
