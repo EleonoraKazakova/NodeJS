@@ -1,16 +1,20 @@
 const express = require('express')
+const parsedBody = require('body-parser')
 const app = express()
 
-app.use('/runs', (req, res, next) => {
-    console.log('This always runs!')
-    next() // Alows the request to continue to the next middleware in line
-} )
+app.use(parsedBody.urlencoded({extended: false}))
 
 app.use('/add-product', (req, res, next) => {
     console.log('Product page!')
-    res.send('<h1>The Add Product page</h1>')
-   
+    
+    res.send('<body><form action="/product" method="POST"> <input type="text" name="title"><button type="submit">Send</button></form><body>')
+
 } )
+
+app.use('/product', (req, res, next) => {
+    console.log(req.body)
+    res.redirect('/')
+})
 
 app.use((req, res, next) => {
     console.log('In another middleware!')
@@ -19,7 +23,10 @@ app.use((req, res, next) => {
 
 app.listen(3000)
 
-
+/* app.use('/runs', (req, res, next) => {
+    console.log('This always runs!')
+    next() // Alows the request to continue to the next middleware in line
+} ) */
 
 
 // const http = require('http')
