@@ -4,6 +4,8 @@ const express = require('express')
 const parsedBody = require('body-parser')
 
 const app = express()
+app.set('view engine', 'pug') // compile tamplate
+app.set('views', 'views') // where to fined
 
 const adminData = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
