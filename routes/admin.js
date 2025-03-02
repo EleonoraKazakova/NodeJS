@@ -10,7 +10,7 @@ const products = []
 router.get('/add-product', (req, res, next) => {
     console.log('Product page!')
     
-    res.render('add-product', {pageTitle: "Add products"})
+    res.render('add-product', {pageTitle: "Add products", path:'/admin/add-product'})
    //  res.sendFile(path.join(rootDir, 'views', 'add-product.html'))
 } )
 
