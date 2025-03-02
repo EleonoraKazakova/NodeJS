@@ -21,10 +21,18 @@ html(lang="en")
             h1 My Products
             p List of all products...  
 
+            
+
+
             if prods.length > 0
+                h3 Greate books
                 ul
                     each product in prods
-                        li.h1 #{product.title}   
-                        button Add to Cart
+                        div
+                            li.h1 #{product.title}
+                            img(src="https://www.shutterstock.com/image-photo/id-like-image-that-represents-260nw-2546167707.jpg", alt="A book")   
+                            h3 Price: €19.99
+                            p Description: It is a very interesting book!!!
+                    button Add to Cart
             else 
                 h1 No products
