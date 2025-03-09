@@ -2,9 +2,14 @@ const path = require('path')
 
 const express = require('express')
 const parsedBody = require('body-parser')
+const expressHbs = require('express-handlebars')
 
 const app = express()
-app.set('view engine', 'pug') // compile tamplate
+
+app.engine(
+    'hbs', 
+    expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'}))
+app.set('view engine', 'hbs') // compile tamplate
 app.set('views', 'views') // where to fined
 
 const adminData = require('./routes/admin')
