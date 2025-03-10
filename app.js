@@ -2,14 +2,11 @@ const path = require('path')
 
 const express = require('express')
 const parsedBody = require('body-parser')
-const expressHbs = require('express-handlebars')
+
 
 const app = express()
 
-app.engine(
-    'hbs', 
-    expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'}))
-app.set('view engine', 'hbs') // compile tamplate
+app.set('view engine', 'ejs') // compile tamplate
 app.set('views', 'views') // where to fined
 
 const adminData = require('./routes/admin')
@@ -29,6 +26,14 @@ app.use((req, res, next) => {
 
 app.listen(3000)
 
+
+/*
+handlebar
+const expressHbs = require('express-handlebars')
+
+app.engine(
+    'hbs', 
+    expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'}))  */
 
 /* app.use('/runs', (req, res, next) => {
     console.log('This always runs!')
