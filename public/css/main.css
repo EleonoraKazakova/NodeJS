@@ -52,3 +52,7 @@ main {
     flex-direction: column;
     width: 260px;
 }
+
+.main-card-width {
+    width: 100%;
+}

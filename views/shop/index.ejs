@@ -16,9 +16,9 @@
                     <div class="main-card">
                         <li > 
                             <h1> <%= product.title %> </h1>
-                            <img src="https://www.shutterstock.com/image-photo/id-like-image-that-represents-260nw-2546167707.jpg", alt="A book" >   
-                            <h3> Price: €19.99 </h3>
-                            <p> Description: It is a very interesting book!!! </p>
+                            <img src="<%= product.imageUrl %>", class="main-card-width", alt="<%= product.title %>" >   
+                            <h3> Price: € <%= product.price %> </h3>
+                            <p> Description:  <%= product.description %> </p>
                         </li>
             
                         <button> Add to Cart </button>
