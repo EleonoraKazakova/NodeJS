@@ -38,3 +38,21 @@ main {
     color: rgb(252, 255, 225);
     
 }
+
+.main-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.main-card {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+}
+
+.main-card-width {
+    width: 100%;
+}
