@@ -20,7 +20,8 @@
                             <h3> Price: € <%= product.price %> </h3>
                             <p> Description:  <%= product.description %> </p>
                         </li>
-            
+
+                        <button> <a href="/products/<%= product.id %>" class="btn">Details</a> </button>
                         <form action="/add-to-cart" method="POST">
                             <button> Add to Cart </button>
                         </form>
