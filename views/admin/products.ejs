@@ -21,8 +21,10 @@
                             <p> Description:  <%= product.description %> </p>
                         </li>
             
-                        <button> Edit </button>
-                        <button> Delete </button>
+                        <button> <a href="/admin/edit-product"> Edit</a> </button>
+                        <form action="/admin/delete-product" method="POST">
+                            <button> Delete </button>
+                        </form>
                     </div>
                     
             <% } %>  
