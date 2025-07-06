@@ -42,6 +42,13 @@ module.exports = class Product {
         getProductsFromFile(cb)
     }
 
+    static findByID(id, cb) {
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id === id)
+            cb(product)
+        })
+    }
+
     /*save() {
         const p = path.join(
             path.dirname(require.main.filename), 

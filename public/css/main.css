@@ -56,3 +56,11 @@ main {
 .main-card-width {
     width: 100%;
 }
+
+.centered {
+    text-align: center;
+}
+
+.centered img {
+    width: 300px;
+}
