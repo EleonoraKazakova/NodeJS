@@ -1,7 +1,7 @@
 const Product = require('../models/product')
 
 exports.getAddProduct = (req, res, next) => {
-    console.log('getAddProduct')
+    console.log('admin EditProduct')
     
     res.render('admin/edit-product', {
         pageTitle: "Add products", 
@@ -53,7 +53,7 @@ exports.postEditProduct = (req, res, next) => {
     const updatedPrice = req.body.price
     const updatedImageUrl = req.body.imageUrl
     const updatedDescription = req.body.description
-    const updatedProduct = new Product(prodId, updatedTitle, updatedTitle, updatedImageUrl, updatedDescription)
+    const updatedProduct = new Product(prodId, updatedTitle, updatedPrice, updatedImageUrl, updatedDescription)
     
     console.log('new ptoduct: ', updatedProduct)
 
