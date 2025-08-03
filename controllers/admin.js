@@ -19,18 +19,20 @@ exports.postAddProduct = (req, res, next) => {
 
     console.log('postAddProduct req.body: ', req.body)
 
-    const product = new Product(title, imageUrl, price, description)
+    const product = new Product(null, title, imageUrl, price, description)
     product.save()
     res.redirect('/')
 }
 
 exports.getEditProduct = (req, res, next) => {
     console.log('getEditProduct')
-    const editMode = req.require.edit
+    const editMode = req.query.edit
+    console.log('editMode: ', editMode)
     if(!editMode) {
         return res.redirect('/')
     }
-    const prodId = req.param.productId
+    const prodId = req.params.productId
+    console.log('prodId_1: ', prodId)
     Product.findByID(prodId, product => {
         if(!product) {
             return res.redirect('/')
@@ -43,6 +45,21 @@ exports.getEditProduct = (req, res, next) => {
         })
     })
     
+}
+
+exports.postEditProduct = (req, res, next) => {
+    const prodId = req.body.productId
+    const updatedTitle = req.body.title
+    const updatedPrice = req.body.price
+    const updatedImageUrl = req.body.imageUrl
+    const updatedDescription = req.body.description
+    const updatedProduct = new Product(prodId, updatedTitle, updatedTitle, updatedImageUrl, updatedDescription)
+    
+    console.log('new ptoduct: ', updatedProduct)
+
+    updatedProduct.save()
+    res.redirect('/admin/products')
+
 }
 
 exports.getProducts = (req, res, next) => {
