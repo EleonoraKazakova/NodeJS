@@ -25,7 +25,7 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getEditProduct = (req, res, next) => {
-    console.log('getEditProduct')
+    console.log('getEditProduct_6: ', req.params)
     const editMode = req.query.edit
     console.log('editMode: ', editMode)
     if(!editMode) {
@@ -48,6 +48,7 @@ exports.getEditProduct = (req, res, next) => {
 }
 
 exports.postEditProduct = (req, res, next) => {
+    console.log('req.body_10: ', req.body)
     const prodId = req.body.productId
     const updatedTitle = req.body.title
     const updatedPrice = req.body.price
@@ -55,7 +56,7 @@ exports.postEditProduct = (req, res, next) => {
     const updatedDescription = req.body.description
     const updatedProduct = new Product(prodId, updatedTitle, updatedPrice, updatedImageUrl, updatedDescription)
     
-    console.log('new ptoduct: ', updatedProduct)
+    console.log('new ptoduct: ', updatedProduct, req.body)
 
     updatedProduct.save()
     res.redirect('/admin/products')
