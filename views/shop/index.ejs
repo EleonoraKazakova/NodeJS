@@ -21,7 +21,8 @@
                             <p> Description:  <%= product.description %> </p>
                         </li>
             
-                        <button> Add to Cart </button>
+                       <!--- <button> Add to Cart </button> -->
+                        <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                     </div>
                     
             <% } %>  

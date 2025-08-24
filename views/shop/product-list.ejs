@@ -20,10 +20,13 @@
                             <h3> Price: € <%= product.price %> </h3>
                             <p> Description:  <%= product.description %> </p>
                         </li>
-            
-                        <form action="/add-to-cart" method="POST">
+
+                        <button> <a href="/products/<%= product.id %>" class="btn">Details</a> </button>
+                        <!--<form action="/add-to-cart" method="POST">
                             <button> Add to Cart </button>
-                        </form>
+                        </form>-->
+
+                        <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                         
                     </div>
                     
