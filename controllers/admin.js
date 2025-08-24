@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
 
     console.log('postAddProduct req.body: ', req.body)
 
-    const product = new Product(null, title, imageUrl, price, description)
+    const product = new Product(null, title, price, imageUrl, description )
     product.save()
     res.redirect('/')
 }
