@@ -40,7 +40,7 @@ exports.getEditProduct = (req, res, next) => {
     }
     const prodId = req.params.productId
     console.log('prodId_1: ', prodId)
-    Product.findByID(prodId, product => {
+    Product.findByPk(prodId).then(product => {
         if(!product) {
             return res.redirect('/')
         }
@@ -50,7 +50,7 @@ exports.getEditProduct = (req, res, next) => {
             editing: editMode,
             product: product,
         })
-    })
+    }).catch(err => console.error(err))
     
 }
 
@@ -61,25 +61,36 @@ exports.postEditProduct = (req, res, next) => {
     const updatedPrice = req.body.price
     const updatedImageUrl = req.body.imageUrl
     const updatedDescription = req.body.description
-    const updatedProduct = new Product(prodId, updatedTitle, updatedPrice, updatedImageUrl, updatedDescription)
+
+    Product.findByPk(prodId)
+        .then(product => {
+            product.title = updatedTitle
+            product.price = updatedPrice
+            product.imageUrl = updatedImageUrl
+            product.description = updatedDescription
+            return product.save()
+        })
+        .then(result => {
+            console.log('Updated Product!!!')
+            res.redirect('/admin/products') 
+        })
+        .catch(err => console.error(err))
     
-    console.log('new ptoduct: ', updatedProduct, req.body)
-
-    updatedProduct.save()
-    res.redirect('/admin/products')
-
+   
 }
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll((products) => {
-        console.log('products_admin: ', products)
+    Product.findAll()
+        .then((products) => {
+            console.log('products_admin: ', products)
 
-        res.render('admin/products', {
-            prods: products, 
-            pageTitle: 'Admin Products', 
-            path: "/admin/products", 
-           })
-    })
+            res.render('admin/products', {
+                prods: products, 
+                pageTitle: 'Admin Products', 
+                path: "/admin/products", 
+            })
+        })
+        .catch(err => console.error(err))
  }
 
  exports.postDeleteProduct = (req, res, next) => {
