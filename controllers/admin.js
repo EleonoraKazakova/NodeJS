@@ -1,7 +1,7 @@
 const Product = require('../models/product')
 
 exports.getAddProduct = (req, res, next) => {
-    console.log('admin EditProduct')
+    // console.log('admin EditProduct')
     
     res.render('admin/edit-product', {
         pageTitle: "Add products", 
@@ -16,7 +16,7 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price
     const description = req.body.description
 
-    console.log('postAddProduct req.body: ', req.body)
+    // console.log('postAddProduct req.body: ', req.body)
 
     req.user
         .createProduct({
@@ -26,7 +26,7 @@ exports.postAddProduct = (req, res, next) => {
             description: description,
         })
         .then(result => {
-           console.log('Created Product')
+          //  console.log('Created Product')
            res.redirect('/admin/products')
         })
         .catch(err => console.error(err))
@@ -34,9 +34,9 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getEditProduct = (req, res, next) => {
-    console.log('getEditProduct_6: ', req.params)
+   //  console.log('getEditProduct_6: ', req.params)
     const editMode = req.query.edit
-    console.log('editMode: ', editMode)
+    // console.log('editMode: ', editMode)
     if(!editMode) {
         return res.redirect('/')
     }
@@ -60,7 +60,7 @@ exports.getEditProduct = (req, res, next) => {
 }
 
 exports.postEditProduct = (req, res, next) => {
-    console.log('req.body_10: ', req.body)
+    // ('req.body_10: ', req.body)
     const prodId = req.body.productId
     const updatedTitle = req.body.title
     const updatedPrice = req.body.price
@@ -76,7 +76,7 @@ exports.postEditProduct = (req, res, next) => {
             return product.save()
         })
         .then(result => {
-            console.log('Updated Product!!!')
+           //  console.log('Updated Product!!!')
             res.redirect('/admin/products') 
         })
         .catch(err => console.error(err))
@@ -86,7 +86,7 @@ exports.getProducts = (req, res, next) => {
     req.user
         .getProducts()
         .then((products) => {
-            console.log('products_admin: ', products)
+           //  console.log('products_admin: ', products)
 
             res.render('admin/products', {
                 prods: products, 
@@ -104,7 +104,7 @@ exports.getProducts = (req, res, next) => {
             return product.destroy()
         })
         .then(result => {
-            console.log('Destroyed Product!')
+            // console.log('Destroyed Product!')
             res.redirect('/admin/products')
         }).catch(err => console.error(err))
  }

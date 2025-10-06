@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use((req, res, next) => {
     User.findByPk(1)
         .then(user => {
-            console.log('user from app.use_11: ', user)
+           // console.log('user from app.use_11: ', user)
             req.user = user
             next()
         })
@@ -45,7 +45,7 @@ Product.belongsToMany(Cart, {through: CartItem})
 
 sequelize
     // .sync({force: true})
-     .sync()
+    .sync()
     .then(result => {
         return User.findByPk(1)
     })

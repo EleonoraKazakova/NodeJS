@@ -2,7 +2,7 @@ const Product = require('../models/product')
 const Cart = require('../models/cart')
 
 exports.getProducts =  (req, res, next) => {
-    console.log('getProducts_shop')
+    // console.log('getProducts_shop')
 
     Product.findAll()
         .then(products => {
@@ -19,7 +19,7 @@ exports.getProducts =  (req, res, next) => {
     const prodId = req.params.productId
     Product.findByPk(prodId)
         .then((product) => {
-            console.log('prodduct: ', product)
+            // ('prodduct: ', product)
             res.render('shop/product-detail', {
                 product: product, 
                 pageTitle: product.title,
@@ -110,12 +110,14 @@ exports.getProducts =  (req, res, next) => {
             if (product) {
                 const oldQuantity = product.cartItem.quantity
                 newQuantity = oldQuantity + 1
+                
                 return product
             }  
-
+            console.log('product_55: ', products.length)
             return Product.findByPk(prodId)
         })
         .then(product => {
+            console.log('product_22: ', product.cartItem)
             return fetchedCart.addProduct(product, {through: { quantity: newQuantity } })
         })
         .then(() => {

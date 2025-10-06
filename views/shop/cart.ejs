@@ -8,8 +8,7 @@
             <% products.forEach(p => { %>
                 <div>
                    <h2> <%= p.title  %> </h2> 
-                   <h3> Quantity: <% p.cartItem.quantity %> </h3>
-                   <h3> id: <% p.id %> </h3>
+                   <h3> Quantity: <%= p.cartItem.quantity %> </h3>
 
                    <form>
                     <input type="hidden" value="<%= p.id %>" name="productId">
