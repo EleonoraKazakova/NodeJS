@@ -72,3 +72,15 @@ main {
 .image img {
     height: 100%;
 }
+
+.cart-block {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.cart-border {
+    border: 1px solid #c1c1c1;
+    padding: 10px;
+    background-color: #fffbf5;
+}

@@ -2,15 +2,15 @@
     </head>
     <body>
 <%- include('../includes/navigation.ejs') %>
-<main>
+<main class="centered">
     <% if (products.length > 0) { %>
-        <ul>
+        <div class="cart-block">
             <% products.forEach(p => { %>
-                <div>
+                <div class="main-card cart-border">
                    <h2> <%= p.title  %> </h2> 
                    <h3> Quantity: <%= p.cartItem.quantity %> </h3>
 
-                   <form>
+                   <form action="/cart-delete-item" method="POST">
                     <input type="hidden" value="<%= p.id %>" name="productId">
                     <button class="btn danger" type="submit"> Delete </button>
                    </form>
