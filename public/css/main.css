@@ -91,3 +91,9 @@ main {
     border: 1px solid red;
     border-radius: 5px;
 }
+
+.order-btn-block {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #c1c1c1;
+}
