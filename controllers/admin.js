@@ -33,7 +33,7 @@ exports.postAddProduct = (req, res, next) => {
     
 }
 
-exports.getEditProduct = (req, res, next) => {
+/*exports.getEditProduct = (req, res, next) => {
    //  console.log('getEditProduct_6: ', req.params)
     const editMode = req.query.edit
     // console.log('editMode: ', editMode)
@@ -107,4 +107,4 @@ exports.getProducts = (req, res, next) => {
             // console.log('Destroyed Product!')
             res.redirect('/admin/products')
         }).catch(err => console.error(err))
- }
+ } */
