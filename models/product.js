@@ -1,12 +1,33 @@
-const fs  = require('fs')
-const path = require('path')
+const Sequelize = require('sequelize')
+const sequelize = require('../util/database')
+const Product = sequelize.define('product', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    title: Sequelize.STRING,
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+    },
+    imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    description: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+})
+
+module.exports = Product
+
+/*
+const db = require('../util/database')
 const Cart = require('./cart')
 
-const p = path.join(
-    path.dirname(require.main.filename), 
-    'data', 
-    'products.json'
-)
 
 const getProductsFromFile = (cb) => {
     
@@ -29,6 +50,28 @@ module.exports = class Product {
         this.description = description
     }
 
+    save() {
+        return db.execute(
+            'INSERT INTO products (title, price, imageUrl, description) VALUE (?, ?, ?, ?)',
+            [this.title, this.price, this.imageUrl, this.description]
+        )
+    }
+
+    static deleteById(id) {
+        
+    }
+
+    static fetchAll(cb) {
+        return db.execute('SELECT * FROM products')
+    }
+
+    static findByID(id) {
+        return db.execute('SELECT * FROM products WHERE products.id = ?', [id])
+    } 
+    }
+     */
+
+    /*
     save() {
         
         console.log('this: ', this)
@@ -74,8 +117,10 @@ module.exports = class Product {
             cb(product)
         })
     }
-
-    /*save() {
+    
+    
+    
+    save() {
         const p = path.join(
             path.dirname(require.main.filename), 
             'data', 
@@ -112,5 +157,3 @@ module.exports = class Product {
         })
        
     } */
-
-}

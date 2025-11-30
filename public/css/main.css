@@ -64,3 +64,36 @@ main {
 .centered img {
     width: 300px;
 }
+
+.image {
+    height: 20rem;
+}
+
+.image img {
+    height: 100%;
+}
+
+.cart-block {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.cart-border {
+    border: 1px solid #c1c1c1;
+    padding: 10px;
+    background-color: #fffbf5;
+}
+
+.danger {
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.order-btn-block {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #c1c1c1;
+}
