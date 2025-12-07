@@ -4,7 +4,7 @@ const Order = require('../models/order')
 exports.getProducts =  (req, res, next) => {
     // console.log('getProducts_shop')
 
-    Product.findAll()
+    Product.fetchAll()
         .then(products => {
             res.render('shop/product-list', {
                 prods: products, 
@@ -43,7 +43,7 @@ exports.getProducts =  (req, res, next) => {
 
  exports.getIndex = (req, res, next) => {
     console.log('getIndex')
-    Product.findAll()
+    Product.fetchAll()
         .then(products => {
             res.render('shop/index', {
                 prods: products, 

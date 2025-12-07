@@ -1,29 +1,29 @@
-const mongodb = require('mongodb')
-const MongoClient =  mongodb.MongoClient
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-let _db
+let _db;
 
-const mongoConnect = () => {
-    MongoClient.connect(
-        'mongodb+srv://eleonorakazakova89_db_user:O39rkbvgKMmUs4SR@cluster0.wangstz.mongodb.net/?appName=Cluster0'
-    )
+const mongoConnect = callback => {
+  MongoClient.connect(
+            'mongodb+srv://eleonorakazakova89_db_user:dSJtbmD77k57I1K8@cluster0.wangstz.mongodb.net/?appName=Cluster0'
+  )
     .then(client => {
-        console.log('Connected!')
-        _db = client.db()
-        callback(client)
+      console.log('Connected!');
+      _db = client.db();
+      callback();
     })
     .catch(err => {
-        console.error(err)
-        throw err
-    })
-}
+      console.log(err);
+      throw err;
+    });
+};
 
 const getDb = () => {
-    if (_db) {
-        return _db
-    }
-    throw 'No database found!'
-}
+  if (_db) {
+    return _db;
+  }
+  throw 'No database found!';
+};
 
-exports.mongoConnect = mongoConnect
-exports.getDb = getDb
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
