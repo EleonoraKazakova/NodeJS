@@ -22,10 +22,10 @@
                         </li>
             
                         <button> 
-                            <a href="/admin/edit-product/<%= product.id %>?edit=true"> Edit</a> 
+                            <a href="/admin/edit-product/<%= product._id %>?edit=true"> Edit</a> 
                         </button>
                         <form action="/admin/delete-product" method="POST">
-                            <input type="hidden" value="<%= product.id %>" name="productId" >
+                            <input type="hidden" value="<%= product._id %>" name="productId" >
                             <button> Delete </button>
                         </form>
                     </div>
