@@ -61,7 +61,7 @@ exports.postEditProduct = (req, res, next) => {
     const updatedPrice = req.body.price
     const updatedImageUrl = req.body.imageUrl
     const updatedDescription = req.body.description
-
+console.log('error_55: ', (prodId)) 
     const product = new Product(
         updatedTitle, 
         updatedPrice, 
@@ -70,6 +70,7 @@ exports.postEditProduct = (req, res, next) => {
         new ObjectId(prodId)
         )
 
+      
     product
         .save()
         .then(result => {
