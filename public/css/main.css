@@ -51,6 +51,8 @@ main {
     display: flex;
     flex-direction: column;
     width: 260px;
+    padding: 10px;
+    border: 1px solid #a29a9a;
 }
 
 .main-card-width {
@@ -96,4 +98,9 @@ main {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #c1c1c1;
+}
+
+.btn {
+    margin-top: 10px;
+    width: 100%;
 }

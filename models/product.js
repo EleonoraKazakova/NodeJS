@@ -13,6 +13,7 @@ class Product {
     }
 
     save() {
+        console.log('this_99: ', this)
         const db = getDb();
         let dbOp;
         if (this._id) {
