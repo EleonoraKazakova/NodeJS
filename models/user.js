@@ -18,6 +18,11 @@ class User {
         const db = getDb()
         return db.collection('users')
                  .findOne({_id: new ObjectId(userId)})
+                 .then(user => {
+                    console.log('user: ', user)
+                    return user
+                 })
+                 .catch(err => console.error(err))
         
         /* or
         return db.collection('users')
