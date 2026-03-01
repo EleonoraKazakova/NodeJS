@@ -5,6 +5,7 @@ const parsedBody = require("body-parser");
 
 const errorController = require('./controllers/error')
 const mongoConnect = require('./util/database').mongoConnect
+const User = require('./models/user')
 
 const app = express();
 
@@ -18,15 +19,15 @@ app.use(parsedBody.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-    /*User.findByPk(1)
+    User.findByPk("69a45574cc3a896569b6f8b5")
         .then(user => {
            // console.log('user from app.use_11: ', user)
             req.user = user
             next()
         })
-        .catch(err => console.error())*/
+        .catch(err => console.error())
 
-        next()
+    next()
 })
 
 app.use("/admin", adminRoutes);
