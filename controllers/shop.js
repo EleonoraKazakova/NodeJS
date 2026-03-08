@@ -94,56 +94,15 @@ exports.getProducts =  (req, res, next) => {
                 console.log('postCart: ', result)
                 res.redirect('/cart')
             })
-    /*let fetchedCart
-    let newQuantity = 1
-
-    req.user
-        .getCart()
-        .then(cart => {
-            fetchedCart = cart
-            return cart.getProducts({where: {id: prodId} })
-        })
-        .then(products => {
-            let product
-
-            if (products.length > 0) {
-                product = products[0]
-            } 
-            
-            if (product) {
-                const oldQuantity = product.cartItem.quantity
-                newQuantity = oldQuantity + 1
-                
-                return product
-            }  
-            console.log('product_55: ', products.length)
-            return Product.findByPk(prodId)
-        })
-        .then(product => {
-            console.log('product_22: ', product.cartItem)
-            return fetchedCart.addProduct(product, {through: { quantity: newQuantity } })
-        })
-        .then(() => {
-            res.redirect('/')
-        })
-        .catch(err => console.error(err)) */
  }
 
  exports.postCartDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId
-    req.user
-    .getCart()
-    .then(cart => {
-        return cart.getProducts({where: {id: prodId}})
-    })
-    .then(products => {
-        const product = products[0]
-        return product.cartItem.destroy()
-    })
-    .then(result => {
-        res.redirect('/cart')
-    })
-    .catch(err => console.error(err))
+    req.user.deleteItemFromCart(prodId)
+            .then(result => {
+                res.redirect('/cart')
+            })
+            .catch(err => console.error(err))
  }
 
 
