@@ -57,18 +57,14 @@ exports.getProducts =  (req, res, next) => {
     // console.log('req.user.cart: ', req.user.cart)
     req.user
         .getCart()
-        .then(cart => {
-            return cart
-                    .getProducts()
-                    .then(products => {
-                        res.render('shop/cart', {
-                            path: '/cart',
-                            pageTitle: 'Your Cart',
-                            products: products
-                        })
-                    })
-                    .catch(err => console.error(err))
-        }).catch(err => console.error(err))
+        .then(products => {
+            res.render('shop/cart', {
+                path: '/cart',
+                pageTitle: 'Your Cart',
+                products: products
+            })      
+        })
+        .catch(err => console.error(err))
     // Cart.getCart(cart => {
         
     //     Product.fetchAll(products => {
@@ -94,7 +90,10 @@ exports.getProducts =  (req, res, next) => {
             .then(product => {
                 return req.user.addToCart(product)
             })
-            .then(result => console.log('postCart: ', result))
+            .then(result => {
+                console.log('postCart: ', result)
+                res.redirect('/cart')
+            })
     /*let fetchedCart
     let newQuantity = 1
 
