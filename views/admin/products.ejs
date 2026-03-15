@@ -14,19 +14,19 @@
             <div class="main-block">
                 <% for (let product of prods) { %>
                     <div class="main-card">
-                        <li > 
+                        <div> 
                             <h1> <%= product.title %> </h1>
                             <img src="<%= product.imageUrl %>", class="main-card-width", alt="<%= product.title %>" >   
                             <h3> Price: € <%= product.price %> </h3>
                             <p> Description:  <%= product.description %> </p>
-                        </li>
+                        </div>
             
-                        <button> 
-                            <a href="/admin/edit-product/<%= product.id %>?edit=true"> Edit</a> 
+                        <button class="default"> 
+                            <a href="/admin/edit-product/<%= product._id %>?edit=true"> Edit</a> 
                         </button>
                         <form action="/admin/delete-product" method="POST">
-                            <input type="hidden" value="<%= product.id %>" name="productId" >
-                            <button> Delete </button>
+                            <input type="hidden" value="<%= product._id %>" name="productId" >
+                            <button class="btn"> Delete </button>
                         </form>
                     </div>
                     

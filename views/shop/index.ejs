@@ -14,13 +14,14 @@
             <div class="main-block">
                 <% for (let product of prods) { %>
                     <div class="main-card">
-                        <li > 
+                        <div > 
                             <h1> <%= product.title %> </h1>
                             <img src="<%= product.imageUrl %>", class="main-card-width", alt="<%= product.title %>" >   
                             <h3> Price: € <%= product.price %> </h3>
                             <p> Description:  <%= product.description %> </p>
-                        </li>
+                        </div>
             
+                        <button  class="default"> <a href="/products/<%= product._id %>">Details</a> </button>
                        <!--- <button> Add to Cart </button> -->
                         <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                     </div>
