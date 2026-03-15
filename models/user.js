@@ -1,4 +1,4 @@
-const mongodb = require('mongodb')
+/*const mongodb = require('mongodb')
 const getDb = require('../util/database').getDb
 
 const ObjectId = mongodb.ObjectId
@@ -105,13 +105,10 @@ class User {
                  })
                  .catch(err => console.error(err))
         
-        /* or
-        return db.collection('users')
-        .find({_id: new ObjectId(userId)})
-        .next()
-        */ 
+        
     }
     
 }
 
-module.exports = User
+module.exports = User 
+*/

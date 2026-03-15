@@ -17,6 +17,7 @@
     "express-handlebars": "3.0",
     "fs-extra": "^11.2.0",
     "mongodb": "^7.0.0",
+    "mongoose": "^9.3.0",
     "mysql2": "^3.14.3",
     "next": "^14.2.8",
     "pug": "^3.0.3",
