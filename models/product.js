@@ -20,6 +20,8 @@ const productSchema = new Schema({
     required: true
   }
 })
+
+module.exports = mongoose.model('Product', productSchema)
 /*const mongodb = require('mongodb')
 const { DOT_NEXT_ALIAS } = require('next/dist/lib/constants')
 const getDb = require('../util/database').getDb
