@@ -7,11 +7,11 @@
         <div class="cart-block">
             <% products.forEach(p => { %>
                 <div class="main-card cart-border">
-                   <h2> <%= p.title  %> </h2> 
+                   <h2> <%= p.productId.title  %> </h2> 
                    <h3> Quantity: <%= p.quantity %> </h3>
 
                    <form action="/cart-delete-item" method="POST">
-                    <input type="hidden" value="<%= p._id %>" name="productId">
+                    <input type="hidden" value="<%= p.productId._id %>" name="productId">
                     <button class="btn danger" type="submit"> Delete </button>
                    </form>
                 </div>
