@@ -124,10 +124,14 @@ exports.getProducts =  (req, res, next) => {
             products: products
            })
         return order.save()
-    }).then(result => {
-        res.redirect('/orders');
+    })
+    .then(result => {
+        return req.user.clearCart()
       })
-      .catch(err => console.log(err));
+    .then(result => {
+        res.redirect('/orders');
+      }  )
+    .catch(err => console.log(err));
   };
 
   exports.getOrders = (req, res, next) => {
