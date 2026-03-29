@@ -1,6 +1,7 @@
 <header class="main-header">
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
+            <div class="manu-left">
             <li class="main-header__item">
                 <a class="<%= path === '/' ? 'active' : '' %> " href="/">Shop</a>
             </li>
@@ -21,6 +22,12 @@
             <li class="main-header__item">
                 <a class="<%= path === '/admin/products' ? 'active' : '' %> " href="/admin/products">
                     Admin Products
+                </a>
+            </li>
+        </div>
+            <li class="main-header__item">
+                <a class="<%= path === '/login' ? 'active' : '' %> " href="/login">
+                    Login
                 </a>
             </li>
         </ul>
