@@ -6,13 +6,13 @@
     <% if (orders.length <= 0) { %>
         <h1>Nothing there!</h1>
     <% } else { %>
-        <div>
+        <div class="orders-block">
             <% orders.forEach(order => { %>
                 <div class="main-order">
-                    <h1>Order - # <%= order._id %></h1>
+                    <h3>Order - # <%= order._id %></h3>
                     <div class="order">
-                        <% order.items.forEach(product => { %>
-                            <span class="order-item"><%= product.title %> (<%= product.quantity %>)</span>
+                        <% order.products.forEach(p => { %>
+                            <span class="order-item"><%= p.product.title %> (<%= p.quantity %>)</span>
                         <% }); %>
                     </div>
                 </div>
