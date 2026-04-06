@@ -164,3 +164,17 @@ main {
 .order-now {
     width: 40%;
 }
+
+.pure-btn {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.pure-btn.logout {
+    color: #fdc044;
+}
