@@ -22,8 +22,10 @@
                         </div>
             
                         <button  class="default"> <a href="/products/<%= product._id %>">Details</a> </button>
-                       <!--- <button> Add to Cart </button> -->
-                        <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                      
+                       <% if (isAuthenticated) { %>
+                            <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                       <% } %>
                     </div>
                     
             <% } %>  
