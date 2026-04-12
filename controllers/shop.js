@@ -50,7 +50,8 @@ exports.getProducts =  (req, res, next) => {
                 prods: products, 
                 pageTitle: 'Shop', 
                 path: "/", 
-                isAuthenticated: req.session.isLoggedIn
+                isAuthenticated: req.session.isLoggedIn,
+                csrfToken: req.csrfToken()
             })
         })
         .catch(err => console.error(err) ) 
