@@ -3,11 +3,16 @@ const bcrypt = require('bcryptjs');
 const { redirect } = require('next/dist/server/api-utils');
 
 exports.getLogin = (req, res, next) => {
-    console.log('session: ', req.session.isLoggedIn)
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('auth/login', {
         path: '/login',
         pageTitle: 'Login',
-        errorMessage: req.flash('error')
+        errorMessage: message
     });
 };
 

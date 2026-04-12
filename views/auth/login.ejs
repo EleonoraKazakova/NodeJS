@@ -19,9 +19,11 @@
             
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Login</button>
+
             <% if (errorMessage) { %>
-                <div><% errorMessage %></div>
+                <div class="user-message-error">Error: <%= errorMessage %></div>
             <% } %>
         </form>
+        
     </main>
 <%- include('../includes/end.ejs') %>

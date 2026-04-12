@@ -178,3 +178,9 @@ main {
 .pure-btn.logout {
     color: #fdc044;
 }
+
+.user-message-error {
+    margin-top: 20px;
+    color: red;
+    border-bottom: 1px dashed red;
+}
