@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
@@ -6,6 +7,12 @@ const transporter = nodemailer.createTransport({
     sendmail: true,
     newline: "unix",
     path: "/usr/sbin/sendmail",
+    /*service: 'gmail',
+    secure: false, // use SSL
+    auth: {
+        user: '1a2b3c4d5e6f7g',
+        pass: '1a2b3c4d5e6f7g',
+    }*/
 })
 
 // sendgrid does not work
@@ -129,4 +136,60 @@ exports.postLogout = (req, res, next) => {
       console.log('destroy err:', err);
       res.redirect('/');
     });
-  };
+};
+
+exports.getReset = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+    res.render('auth/reset', {
+        path: '/reset',
+        pageTitle: 'Reset Password',
+        errorMessage: message
+    });
+}
+
+exports.postReset = (req, res, next) => {
+    crypto.randomBytes(32, (err, buffer) => {
+        if (err) {
+            console.error('postReset err: ', err)
+            return res.redirect('/reset')
+        }
+        const token = buffer.toString('hex')
+        User.findOne({email: req.body.email})
+        .then(user => {
+            if (!user) {
+                req.flash('error', 'No account with that email found.')
+                return res.redirect('/reset')
+            }
+            user.resetToken = token
+            user.resetTokenExpiration = Date.now() + 3600000
+            return user.save()
+        })
+        .then(result => {
+            console.log('reset link: ', `http://localhost:3000/reset/${token}`)
+            res.redirect('/')
+            transporter.sendMail({
+                to: req.body.email,
+                from: 'shop@node-complete.com',
+                subject: 'Password reset',
+                text: `
+                <p>Yiu requested a password reset</p>
+                <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.
+                `
+            }, (err, info) => {
+                if (err) {
+                  console.error('error email', err);
+                  return;
+                }
+                console.log('email info: ', info.envelope);
+                console.log(info.messageId);
+              }
+              )
+        })
+        .catch(err => console.error('User.findOne email: ', err))
+    })
+}
