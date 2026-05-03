@@ -11,7 +11,7 @@ const userSchema = new Schema({
         required: true
     },
     resetToken: String,
-    reserTokenExpiration: Date,
+    resetTokenExpiration: Date,
     cart: {
         items: [
             { 
