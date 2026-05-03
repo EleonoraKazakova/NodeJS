@@ -21,3 +21,10 @@
     font: inherit;
     border-radius: 2px;
 }
+
+.main-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 14px;
+}
