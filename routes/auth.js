@@ -9,7 +9,14 @@ router.get( '/signup', authController.getSignup)
 
 router.post( '/login', authController.postLogin ) 
 
-router.post( '/signup', expressValidator.check('email').isEmail(), authController.postSignup)
+router.post( 
+    '/signup', 
+    expressValidator
+        .check('email')
+        .isEmail()
+        .withMessage('Please enter a valid email.'), 
+    authController.postSignup
+)
 
 router.post( '/logout', authController.postLogout ) 
 
