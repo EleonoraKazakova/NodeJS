@@ -100,45 +100,38 @@ exports.postSignup = (req, res, next) => {
         });
     }
 
-    User.findOne({email: email})
-        .then(userDoc => {
-            if (userDoc) {
-                req.flash('error', 'E-mail exists already, please pick a different one')
-                return res.redirect('/signup')
-            }
-            return bcrypt
-                .hash(password, 12)
-                .then(hashedPassword => {
-                    const user = new User({
-                        email: email,
-                        password: hashedPassword,
-                        cart: {items: []}
-                    })
-                    return user.save()
-                })
-                .then(result => {
-                    res.redirect('/login')
-                    return transporter.sendMail({
-                        to: email,
-                        from: 'shop@node-complete.com',
-                        subject: 'Signup succeeded!',
-                        text: '<h1>You successfully signed up!</h1>'
-                    }, (err, info) => {
-                        if (err) {
-                          console.error('error email', err);
-                          return;
-                        }
-                        console.log('email info: ', info.envelope);
-                        console.log(info.messageId);
-                      }
-                      )
-                })
-                .catch(err => {
-                    console.error('err req: ', err)
-                })
+ 
+    bcrypt
+    .hash(password, 12)
+    .then(hashedPassword => {
+        const user = new User({
+            email: email,
+            password: hashedPassword,
+            cart: {items: []}
         })
+        return user.save()
+    })
+    .then(result => {
+        res.redirect('/login')
+        return transporter.sendMail({
+            to: email,
+            from: 'shop@node-complete.com',
+            subject: 'Signup succeeded!',
+            text: '<h1>You successfully signed up!</h1>'
+        }, (err, info) => {
+            if (err) {
+                console.error('error email', err);
+                return;
+            }
+            console.log('email info: ', info.envelope);
+            console.log(info.messageId);
+            }
+            )
+    })
+    .catch(err => {
+        console.error('err req: ', err)
+    })
         
-        .catch(err => console.log('postSignup', err))
 }
 
 exports.postLogout = (req, res, next) => {
