@@ -11,10 +11,22 @@ router.post( '/login', authController.postLogin )
 
 router.post( 
     '/signup', 
-    expressValidator
+    [
+        expressValidator
         .check('email')
         .isEmail()
-        .withMessage('Please enter a valid email.'), 
+        .withMessage('Please enter a valid email.')
+        .custom((value, {req}) => {
+            if (value === 'test@test.com') {
+                throw new Error('This email addres is forbidden.')
+            }
+            return true
+        }),
+        expressValidator
+            .body('password', 'Please enter minimum 4 numbers or characters.')
+            .isLength({min: 4})
+            .isAlphanumeric()
+    ], 
     authController.postSignup
 )
 
