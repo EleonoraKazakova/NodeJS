@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const validationResult = require('express-validator')
 
 const transporter = nodemailer.createTransport({
     sendmail: true,
@@ -89,6 +90,16 @@ exports.postSignup = (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
     const confirmPassword = req.body.confirmPassword
+    const errors = validationResult.validationResult(req)
+
+    if (!errors.isEmpty()) {
+        console.log('errors.array(): ', errors.array())
+        return res.status(422).render('auth/login', {
+            path: '/login',
+            pageTitle: 'Login',
+            errorMessage: errors.array()
+        });
+    }
 
     User.findOne({email: email})
         .then(userDoc => {
