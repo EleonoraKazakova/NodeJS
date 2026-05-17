@@ -182,5 +182,8 @@ main {
 .user-message-error {
     margin-top: 20px;
     color: red;
-    border-bottom: 1px dashed red;
+    border: 1px solid red;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: white;
 }
