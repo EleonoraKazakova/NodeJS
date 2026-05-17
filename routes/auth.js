@@ -11,8 +11,15 @@ router.get( '/signup', authController.getSignup)
 
 router.post( '/login', 
             [
-                expressValidator.body('email').isEmail().withMessage('Please enter valid email.'), 
-                expressValidator.body('password', 'Pssword has to be valid.').isLength({min: 4}).isAlphanumeric()
+                expressValidator.body('email')
+                .isEmail()
+                .withMessage('Please enter valid email.')
+                .normalizeEmail(), 
+
+                expressValidator.body('password', 'Pssword has to be valid.')
+                .isLength({min: 4})
+                .isAlphanumeric()
+                .trim()
             ], 
             authController.postLogin ) 
 
@@ -38,13 +45,16 @@ router.post(
                 }
               });
                 
-        }),
+        }).normalizeEmail(),
+
         expressValidator
             .body('password', 'Please enter minimum 4 numbers or characters.')
             .isLength({min: 4})
-            .isAlphanumeric(),
+            .isAlphanumeric()
+            .trim(),
         expressValidator
             .body('confirmPassword')
+            .trim() 
             .custom((value, {req}) => {
                 if (value !== req.body.password) {
                     throw new Error('Passwords have to match!')
