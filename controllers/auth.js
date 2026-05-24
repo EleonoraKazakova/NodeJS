@@ -127,7 +127,12 @@ exports.postLogin = (req, res, next) => {
         
         console.log('req.session.isLoggedIn: ', req.session.isLoggedIn)
     })
-    .catch(error => console.log('Error user: ', error))
+    .catch(err => {
+        console.log('Error user: ', err)
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+    })
 };
 
 exports.postSignup = (req, res, next) => {
@@ -180,7 +185,10 @@ exports.postSignup = (req, res, next) => {
             )
     })
     .catch(err => {
-        console.error('err req: ', err)
+        console.error('err req', err)
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
     })
         
 }
@@ -244,7 +252,12 @@ exports.postReset = (req, res, next) => {
               }
               )
         })
-        .catch(err => console.error('User.findOne email: ', err))
+        .catch(err => {
+            console.error('User.findOne email: ', err)
+            const error = new Error(err)
+            error.httpStatusCode = 500
+            return next(error)
+        })
     })
 }
 
@@ -268,7 +281,12 @@ exports.getNewPassword = (req, res, next) => {
                 passwordToken: token
             });
         })
-        .catch(err => console.error('getNewPassword err: ', err))
+        .catch(err => {
+            console.error('getNewPassword err: ', err)
+            const error = new Error(err)
+            error.httpStatusCode = 500
+            return next(error)
+        })
 }
 
 exports.postNewPassword = (req, res, next) => {
@@ -295,5 +313,10 @@ exports.postNewPassword = (req, res, next) => {
     .then(result => {
         res.redirect('/login')
     })
-    .catch(err => console.error('postNewPassword err: ', err))
+    .catch(err => {
+        console.error('postNewPassword err: ', err)
+        const error = new Error(err)
+        error.httpStatusCode = 500
+        return next(error)
+    })
 }
