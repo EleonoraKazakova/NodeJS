@@ -20,9 +20,27 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title
-    const imageUrl = req.body.imageUrl
+    const image = req.file
     const price = req.body.price
     const description = req.body.description
+    console.log('imageUrl_99: ', image)
+
+    if (!image) {
+        return res.status(422).render('admin/edit-product', {
+            pageTitle: "Add products", 
+            path:'/admin/edit-product', 
+            editing: false,
+            hasError: true,
+            product: {
+                title: title,
+                price: price,
+                description: description,
+            },
+            errorMessage: 'Attached file is not an image',
+            validationErrors: []
+        })
+    }
+
     const errors = validationResult.validationResult(req)
 
     if (!errors.isEmpty()) {
@@ -42,6 +60,8 @@ exports.postAddProduct = (req, res, next) => {
             validationErrors: errors.array()
         })
     }
+
+    const imageUrl = image.path 
 
     const product = new Product({
        // _id: new mongoose.Types.ObjectId('69c02412106436fc5fb374df'),
@@ -119,7 +139,7 @@ exports.postEditProduct = (req, res, next) => {
     const prodId = req.body.productId
     const updatedTitle = req.body.title
     const updatedPrice = req.body.price
-    const updatedImageUrl = req.body.imageUrl
+    const image = req.file
     const updatedDescription = req.body.description
     const errors = validationResult.validationResult(req)
 
@@ -132,7 +152,6 @@ exports.postEditProduct = (req, res, next) => {
             hasError: true,
             product: {
                 title: updatedTitle,
-                imageUrl: updatedImageUrl,
                 price: updatedPrice,
                 description: updatedDescription,
                 _id: prodId
@@ -149,8 +168,12 @@ exports.postEditProduct = (req, res, next) => {
             }
             product.title = updatedTitle, 
             product.price = updatedPrice, 
-            product.description = updatedDescription,
-            product.imageUrl = updatedImageUrl
+            product.description = updatedDescription
+
+            if (image) {
+                product.imageUrl = image.path
+            }
+            
             return product
                     .save()
                     .then(result => {

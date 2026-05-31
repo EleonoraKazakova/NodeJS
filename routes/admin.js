@@ -22,14 +22,14 @@ router.post('/add-product', [
     .isLength({min: 3})
     .trim(),
 
-    validationResult.check('imageUrl')
-    .isURL(),
+   /* validationResult.check('imageUrl')
+    .isURL(),*/
 
     validationResult.check('price')
     .isFloat(),
 
     validationResult.check('description')
-    .isLength({min: 5, max: 10})
+    .isLength({min: 1, max: 10})
     .trim(),
 ], isAuth, adminController.postAddProduct)  
 
@@ -41,14 +41,11 @@ router.post('/edit-product', [
     .isLength({min: 3})
     .trim(),
 
-    validationResult.check('imageUrl')
-    .isURL(),
-
     validationResult.check('price')
     .isFloat(),
 
     validationResult.check('description')
-    .isLength({min: 5, max: 10})
+    .isLength({min: 1, max: 10})
     .trim(),
 ], isAuth, adminController.postEditProduct)
 
