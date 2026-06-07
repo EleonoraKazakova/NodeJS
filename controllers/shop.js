@@ -72,6 +72,7 @@ exports.getProducts =  (req, res, next) => {
     // console.log('req.user.cart: ', req.user.cart)
     req.user
         .populate('cart.items.productId')
+        .execPopulate()
         .then(user => {
             console.log('getCart products: ', user.cart.items)
             const products = user.cart.items
@@ -82,7 +83,7 @@ exports.getProducts =  (req, res, next) => {
             })      
         })
         .catch(err => {
-            console.log(err)
+            console.log('getCart error: ', err)
             const error = new Error(err)
             error.httpStatusCode = 500
             return next(error)
@@ -113,9 +114,15 @@ exports.getProducts =  (req, res, next) => {
                 return req.user.addToCart(product)
             })
             .then(result => {
-                console.log('postCart: ', result)
+                console.log('postCart: ', result, result.cart)
                 res.redirect('/cart')
             })
+            .catch(err => {
+                console.log('postCart error: ', err)
+                const error = new Error(err);
+                error.httpStatusCode = 500;
+                return next(error);
+            });
  }
 
  exports.postCartDeleteProduct = (req, res, next) => {
@@ -136,6 +143,7 @@ exports.getProducts =  (req, res, next) => {
  exports.postOrder = (req, res, next) => {
     req.user
     .populate('cart.items.productId')
+    .execPopulate()
     .then(user => {
         console.log('postCart products: ', user.cart.items)
         const products = user.cart.items.map(i => {
