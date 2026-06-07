@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 const Product = require('../models/product')
 const Order = require('../models/order')
 const user = require('../models/user')
@@ -5,7 +8,7 @@ const user = require('../models/user')
 exports.getProducts =  (req, res, next) => {
     Product.find()
         .then(products => {
-            console.log('getProducts')
+            console.log('getProducts_00')
             res.render('shop/product-list', {
                 prods: products, 
                 pageTitle: 'All products', 
@@ -69,7 +72,7 @@ exports.getProducts =  (req, res, next) => {
  }
 
  exports.getCart = (req, res, next) => {
-    // console.log('req.user.cart: ', req.user.cart)
+     console.log('req.user.cart_00: ', req.user.cart)
     req.user
         .populate('cart.items.productId')
         .execPopulate()
@@ -175,6 +178,7 @@ exports.getProducts =  (req, res, next) => {
   exports.getOrders = (req, res, next) => {
     Order.find({'user.userId': req.user._id})
       .then(orders => {
+        console.log(orders)
         res.render('shop/orders', {
           path: '/orders',
           pageTitle: 'Your Orders',
@@ -188,6 +192,22 @@ exports.getProducts =  (req, res, next) => {
         return next(error)
       });
   };
+
+  exports.getInvoice = ( req, res, next ) => {
+    const orderId = req.params.orderId
+    const invoiceName = 'invoice-' + orderId + '.pdf'
+    const invoicePath = path.join('data', 'invoices', invoiceName)
+    fs.readFile(invoicePath, (err, data) => {
+        if (err) {
+            return next(err)
+        }
+        res.setHeader('Content-Type', 'application/pdf')
+        // res.setHeader('Content-Disposition', 'attachment; filename="' + invoiceName + '"')
+        res.setHeader('Content-Disposition', 'inline; filename="' + invoiceName + '"')
+        res.send(data)
+    })
+
+  }
 
  /* exports.getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
