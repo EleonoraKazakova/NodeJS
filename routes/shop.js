@@ -23,6 +23,8 @@ const router = express.Router()
 
  router.get('/orders', shopController.getOrders)
 
+ router.get('/orders/:orderId')
+
 // router.get('/checkout', shopController.getCheckout)
 
 
