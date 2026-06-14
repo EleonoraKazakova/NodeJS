@@ -9,7 +9,7 @@
         <div class="orders-block">
             <% orders.forEach(order => { %>
                 <div class="main-order">
-                    <h3>Order - # <%= order._id %></h3>
+                    <h3>Order - # <%= order._id %>  - <a href="/orders/<%= order._id %>">Invoice</a></h3>
                     <div class="order">
                         <% order.products.forEach(p => { %>
                             <span class="order-item"><%= p.product.title %> (<%= p.quantity %>)</span>
