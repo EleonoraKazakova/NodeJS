@@ -76,7 +76,6 @@ exports.getProducts =  (req, res, next) => {
      console.log('req.user.cart_00: ', req.user.cart)
     req.user
         .populate('cart.items.productId')
-        .execPopulate()
         .then(user => {
             console.log('getCart products: ', user.cart.items)
             const products = user.cart.items
@@ -147,7 +146,6 @@ exports.getProducts =  (req, res, next) => {
  exports.postOrder = (req, res, next) => {
     req.user
     .populate('cart.items.productId')
-    .execPopulate()
     .then(user => {
         console.log('postCart products: ', user.cart.items)
         const products = user.cart.items.map(i => {
