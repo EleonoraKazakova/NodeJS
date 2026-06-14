@@ -49,6 +49,13 @@ main {
     
 }
 
+.main-block-admin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
 .main-block {
     display: flex;
     flex-direction: column;
