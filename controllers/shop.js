@@ -168,7 +168,7 @@ exports.getProducts =  (req, res, next) => {
     .then(result => {
         res.redirect('/orders');
       }  )
-      .catch(err => {
+    .catch(err => {
         console.log(err)
         const error = new Error(err)
         error.httpStatusCode = 500
