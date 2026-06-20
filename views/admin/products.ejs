@@ -13,7 +13,7 @@
             <% if (prods.length > 0) { %>
             <div class="main-block-admin">
                 <% for (let product of prods) { %>
-                    <div class="main-card">
+                    <article class="main-card">
                         <div> 
                             <h1> <%= product.title %> </h1>
                             <img src="/<%= product.imageUrl %>" class="main-card-width" alt="<%= product.title %>" >   
@@ -24,12 +24,12 @@
                         <button class="default"> 
                             <a href="/admin/edit-product/<%= product._id %>?edit=true"> Edit</a> 
                         </button>
-                        <form action="/admin/delete-product" method="POST">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <input type="hidden" value="<%= product._id %>" name="productId" >
-                            <button class="btn"> Delete </button>
-                        </form>
-                    </div>
+                        
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" value="<%= product._id %>" name="productId" >
+                        <button class="btn" type="button" onclick="deleteProduct(this)"> Delete </button>
+                        
+                    </article>
                     
             <% } %>  
         
@@ -39,3 +39,4 @@
     </div>
     </main>
 <%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"> </script>
