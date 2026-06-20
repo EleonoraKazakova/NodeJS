@@ -26,11 +26,14 @@
                         <% if (isAuthenticated) { %>
                             <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                         <% } %>
+                        
 
                     </div>
                     
             <% } %>  
-        
+            
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, previosPage: previosPage, nextPage: nextPage, lastPage: lastPage, hasPreviosPage: hasPreviosPage, hasNextPage: hasNextPage}) %>
+
             <% } else {  %>
                 <h1> No products Found!</h1>
              <% } %>   </div>

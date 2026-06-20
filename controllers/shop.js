@@ -9,14 +9,30 @@ const Order = require('../models/order')
 const ITEMS_PER_PAGE = 1
 
 exports.getProducts =  (req, res, next) => {
+    const page = Number(req.query.page) || 1
+    let totalItems
+    console.log('getProduts_056: ', req.query)
+
     Product.find()
+        .countDocuments()
+        .then(numProducts => {
+            totalItems = numProducts
+            return Product.find()
+            .skip((page - 1) * ITEMS_PER_PAGE)
+            .limit(ITEMS_PER_PAGE)
+        })
         .then(products => {
-            console.log('getProducts_00')
             res.render('shop/product-list', {
                 prods: products, 
                 pageTitle: 'All products', 
-                path: "/products", 
-               })
+                path: "/products",
+                currentPage: page,
+                hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+                hasPreviosPage: page > 1,
+                nextPage: page + 1,
+                previosPage: page - 1,
+                lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+            })
         })
         .catch(err => {
             console.log(err)
