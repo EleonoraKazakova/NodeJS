@@ -13,7 +13,7 @@
             <% if (prods.length > 0) { %>
             <div class="main-block-admin">
                 <% for (let product of prods) { %>
-                    <div class="main-card">
+                    <article class="main-card">
                         <div> 
                             <h1> <%= product.title %> </h1>
                             <img src="/<%= product.imageUrl %>" class="main-card-width" alt="<%= product.title %>" >   
@@ -29,7 +29,7 @@
                         <input type="hidden" value="<%= product._id %>" name="productId" >
                         <button class="btn" type="button" onclick="deleteProduct(this)"> Delete </button>
                         
-                    </div>
+                    </article>
                     
             <% } %>  
         
