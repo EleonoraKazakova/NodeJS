@@ -49,12 +49,20 @@ main {
     
 }
 
-.main-block {
+.main-block-admin {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+}
+
+.main-block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
 }
 
 .main-card {
@@ -186,4 +194,29 @@ main {
     padding: 14px;
     border-radius: 8px;
     background-color: white;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 1rem;
+}
+.pagination a {
+    color: black;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.pagination a:hover,
+.pagination a:active, 
+.pagination a.active {
+    background-color: #fdc044;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
 }
