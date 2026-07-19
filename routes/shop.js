@@ -25,7 +25,12 @@ const router = express.Router()
 
  router.get('/orders/:orderId', isAuth, shopController.getInvoice)
 
-// router.get('/checkout', shopController.getCheckout)
+ router.get('/checkout', isAuth, shopController.getCheckout)
+
+ router.get('/checkout/success', isAuth, shopController.getCheckoutSuccess) // or shopController.postOrder
+
+ router.get('/checkout/cancel', isAuth, shopController.getCheckout)
+
 
 
 

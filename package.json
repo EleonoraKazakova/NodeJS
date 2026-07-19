@@ -34,6 +34,7 @@
     "pdfkit": "^0.19.1",
     "pug": "^3.0.3",
     "sequelize": "^6.37.7",
+    "stripe": "^22.3.2",
     "twilio": "^5.13.1"
   },
   "devDependencies": {
